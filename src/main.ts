@@ -2,8 +2,7 @@ import "./style.css";
 import typescriptLogo from "./typescript.svg";
 import { mainLoop, Entity } from "./ecs";
 import { IncrementSystem } from "./systems/shared";
-
-const incrSystem = new IncrementSystem();
+import { DisplaySystem } from "./systems/display";
 
 const incrEntity = new Entity([
   {
@@ -14,39 +13,12 @@ const incrEntity = new Entity([
 
 const ent1 = new Entity([
   {
-    name: "position",
-    x: 100,
-    y: 100,
-  },
-  {
-    name: "style",
-    style: {
-      width: 100,
-      height: 100,
-      background: "blue",
-      position: "absolute",
-    },
+    name: "display",
+    display: "",
   },
 ]);
 
-const ent2 = new Entity([
-  {
-    name: "position",
-    x: 100,
-    y: 100,
-  },
-  {
-    name: "style",
-    style: {
-      width: 100,
-      height: 100,
-      background: "blue",
-      position: "absolute",
-    },
-  },
-]);
-
-mainLoop([ent1, ent2, incrEntity], [incrSystem]);
+mainLoop([ent1, incrEntity], [new IncrementSystem(), new DisplaySystem()]);
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
