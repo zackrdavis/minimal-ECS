@@ -1,18 +1,20 @@
-type Component = {
+export type TComponent = {
   name: string; // position, health, etc.
   [key: string]: any; // all actual data, e.g. health: 100
 };
 
 export class Entity {
-  components: { [key: string]: Component };
+  // hashmap of components
+  components: { [key: string]: TComponent };
 
-  constructor(initComps?: Component[]) {
+  constructor(initComps?: TComponent[]) {
+    // built initial list of components if provided
     this.components = {};
     initComps &&
       initComps.forEach((comp) => (this.components[comp.name] = comp));
   }
 
-  set(component: Component) {
+  set(component: TComponent) {
     const key = component.name;
     this.components[key] = component;
   }
@@ -25,3 +27,37 @@ export class Entity {
     return this.get(name) !== undefined;
   }
 }
+
+type TSystem = {
+  update: Function;
+};
+
+export class IncrementSystem {
+  update(entities: Entity[]) {
+    for (const entity of entities) {
+      const incrementComponent = entity.get("integer");
+      console.log(incrementComponent.value);
+      incrementComponent.value += 1;
+    }
+  }
+}
+
+export const mainLoop = (entities: Entity[], systems: TSystem[]) => {
+  let tickInterval = setInterval(() => {});
+
+  let ticks = 0;
+
+  const doTick = () => {
+    if (ticks >= 100) {
+      clearInterval(tickInterval);
+    }
+
+    for (const system of systems) {
+      system.update(entities);
+    }
+
+    ticks += 1;
+  };
+
+  tickInterval = setInterval(doTick, 500);
+};

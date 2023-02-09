@@ -1,5 +1,17 @@
 import "./style.css";
 import typescriptLogo from "./typescript.svg";
+import { mainLoop, IncrementSystem, Entity } from "./ecs";
+
+const incrSystem = new IncrementSystem();
+
+const incrEntity = new Entity([
+  {
+    name: "integer",
+    value: 0,
+  },
+]);
+
+mainLoop([incrEntity], [incrSystem]);
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
