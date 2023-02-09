@@ -3,6 +3,10 @@ export type TComponent = {
   [key: string]: any; // all actual data, e.g. health: 100
 };
 
+type TSystem = {
+  update: Function;
+};
+
 export class Entity {
   // hashmap of components
   components: { [key: string]: TComponent };
@@ -25,20 +29,6 @@ export class Entity {
 
   has(name: string) {
     return this.get(name) !== undefined;
-  }
-}
-
-type TSystem = {
-  update: Function;
-};
-
-export class IncrementSystem {
-  update(entities: Entity[]) {
-    for (const entity of entities) {
-      const incrementComponent = entity.get("integer");
-      console.log(incrementComponent.value);
-      incrementComponent.value += 1;
-    }
   }
 }
 

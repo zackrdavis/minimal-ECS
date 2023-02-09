@@ -1,6 +1,7 @@
 import "./style.css";
 import typescriptLogo from "./typescript.svg";
-import { mainLoop, IncrementSystem, Entity } from "./ecs";
+import { mainLoop, Entity } from "./ecs";
+import { IncrementSystem } from "./systems/shared";
 
 const incrSystem = new IncrementSystem();
 
@@ -11,7 +12,41 @@ const incrEntity = new Entity([
   },
 ]);
 
-mainLoop([incrEntity], [incrSystem]);
+const ent1 = new Entity([
+  {
+    name: "position",
+    x: 100,
+    y: 100,
+  },
+  {
+    name: "style",
+    style: {
+      width: 100,
+      height: 100,
+      background: "blue",
+      position: "absolute",
+    },
+  },
+]);
+
+const ent2 = new Entity([
+  {
+    name: "position",
+    x: 100,
+    y: 100,
+  },
+  {
+    name: "style",
+    style: {
+      width: 100,
+      height: 100,
+      background: "blue",
+      position: "absolute",
+    },
+  },
+]);
+
+mainLoop([ent1, ent2, incrEntity], [incrSystem]);
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>

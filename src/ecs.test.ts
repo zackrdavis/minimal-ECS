@@ -1,5 +1,6 @@
 import { assert, expect, test } from "vitest";
-import { Entity, IncrementSystem } from "./ecs";
+import { Entity } from "./ecs";
+import { IncrementSystem } from "./systems/shared";
 
 test("set_and_get_component_by_name", () => {
   const entity = new Entity();
