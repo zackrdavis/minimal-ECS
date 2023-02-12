@@ -6,8 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
   </head>
-  <body>
-    <div id="app"></div>
+  <body style="display: flex; align-items: center; justify-content: center">
+    <div id="app">
+      <canvas
+        id="ecsCanvas"
+        width="500"
+        height="500"
+        style="border: 1px solid black; background: white"
+      ></canvas>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
