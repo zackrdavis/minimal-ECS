@@ -26,7 +26,7 @@ const ball1 = new Entity([
   },
   {
     name: "velocity",
-    x: -3,
+    x: 0,
     y: -1,
   },
   {
@@ -45,12 +45,60 @@ const ball2 = new Entity([
   },
   {
     name: "location",
-    x: 100,
-    y: 80,
+    x: 290,
+    y: 250,
   },
   {
     name: "velocity",
     x: 2,
+    y: 1,
+  },
+  {
+    name: "collision",
+    width: 20,
+    height: 20,
+  },
+]);
+
+const ball3 = new Entity([
+  {
+    name: "style",
+    width: 30,
+    height: 30,
+    color: "orange",
+  },
+  {
+    name: "location",
+    x: 300,
+    y: 400,
+  },
+  {
+    name: "velocity",
+    x: -1,
+    y: -2,
+  },
+  {
+    name: "collision",
+    width: 30,
+    height: 30,
+  },
+]);
+
+const ball4 = new Entity([
+  {
+    name: "style",
+    width: 20,
+    height: 20,
+    color: "grey",
+  },
+  {
+    name: "location",
+    x: 240,
+    y: 400,
+  },
+  {
+    name: "velocity",
+    x: -2,
     y: 2,
   },
   {
@@ -157,11 +205,21 @@ const leftWall = new Entity([
 ]);
 
 mainLoop(
-  [ball1, ball2, topWall, rightWall, bottomWall, leftWall, incrEntity],
+  [
+    ball1,
+    ball2,
+    ball3,
+    ball4,
+    topWall,
+    rightWall,
+    bottomWall,
+    leftWall,
+    incrEntity,
+  ],
   [
     new DisplaySystem(),
+    new CollisionSystem(),
     new MomentumSystem(),
     new IncrementSystem(),
-    new CollisionSystem(),
   ]
 );
