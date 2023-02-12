@@ -38,7 +38,7 @@ export const mainLoop = (entities: Entity[], systems: TSystem[]) => {
   let ticks = 0;
 
   const doTick = () => {
-    if (ticks >= 100) {
+    if (ticks >= 10000) {
       clearInterval(tickInterval);
     }
 
@@ -49,5 +49,5 @@ export const mainLoop = (entities: Entity[], systems: TSystem[]) => {
     ticks += 1;
   };
 
-  tickInterval = setInterval(doTick, 100);
+  tickInterval = setInterval(doTick, 10);
 };
