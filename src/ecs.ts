@@ -49,5 +49,5 @@ export const mainLoop = (entities: Entity[], systems: TSystem[]) => {
     ticks += 1;
   };
 
-  tickInterval = setInterval(doTick, 500);
+  tickInterval = setInterval(doTick, 100);
 };

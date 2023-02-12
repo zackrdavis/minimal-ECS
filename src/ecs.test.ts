@@ -58,8 +58,6 @@ test("increment_system_updates_correct component", () => {
     },
   ]);
 
-  const entities = [incrementEntity];
-
   const expectedInteger = {
     name: "integer",
     value: 1,
@@ -70,7 +68,7 @@ test("increment_system_updates_correct component", () => {
     value: 0,
   };
 
-  incrementSystem.update(entities);
+  incrementSystem.update([incrementEntity]);
 
   const actualInteger = incrementEntity.get("integer");
   const actualDummy = incrementEntity.get("dummy");
