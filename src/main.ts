@@ -4,6 +4,48 @@ import { IncrementSystem } from "./systems/shared";
 import { DisplaySystem } from "./systems/display";
 import { MomentumSystem } from "./systems/momentum";
 import { CollisionSystem } from "./systems/collision";
+import { PlayerControlSystem } from "./systems/playerControl";
+
+type XY = {
+  x: number;
+  y: number;
+};
+
+const ballArchetype = ({
+  color,
+  diameter,
+  location,
+  velocity,
+}: {
+  color: string;
+  diameter: number;
+  location: XY;
+  velocity: XY;
+}) => {
+  return new Entity([
+    {
+      name: "style",
+      width: diameter,
+      height: diameter,
+      color: color,
+    },
+    {
+      name: "location",
+      x: location.x,
+      y: location.y,
+    },
+    {
+      name: "velocity",
+      x: velocity.x,
+      y: velocity.y,
+    },
+    {
+      name: "collision",
+      width: diameter,
+      height: diameter,
+    },
+  ]);
+};
 
 const incrEntity = new Entity([
   {
@@ -26,7 +68,7 @@ const ball1 = new Entity([
   },
   {
     name: "velocity",
-    x: 0,
+    x: -1,
     y: -1,
   },
   {
@@ -89,7 +131,7 @@ const ball4 = new Entity([
     name: "style",
     width: 20,
     height: 20,
-    color: "grey",
+    color: "purple",
   },
   {
     name: "location",
@@ -204,6 +246,15 @@ const leftWall = new Entity([
   },
 ]);
 
+const player = ballArchetype({
+  color: "tomato",
+  diameter: 10,
+  velocity: { x: 0, y: 0 },
+  location: { x: 200, y: 200 },
+});
+
+player.set({ name: "playerControl" });
+
 mainLoop(
   [
     ball1,
@@ -211,6 +262,7 @@ mainLoop(
     ball3,
     ball4,
     topWall,
+    player,
     rightWall,
     bottomWall,
     leftWall,
@@ -220,6 +272,6 @@ mainLoop(
     new DisplaySystem(),
     new CollisionSystem(),
     new MomentumSystem(),
-    new IncrementSystem(),
+    new PlayerControlSystem(),
   ]
 );
