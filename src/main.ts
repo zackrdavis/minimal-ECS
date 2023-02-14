@@ -5,6 +5,7 @@ import { DisplaySystem } from "./systems/display";
 import { MomentumSystem } from "./systems/momentum";
 import { CollisionSystem } from "./systems/collision";
 import { PlayerControlSystem } from "./systems/playerControl";
+import { FrictionSystem } from "./systems/friction";
 
 type XY = {
   x: number;
@@ -248,12 +249,12 @@ const leftWall = new Entity([
 
 const player = ballArchetype({
   color: "tomato",
-  diameter: 10,
+  diameter: 20,
   velocity: { x: 0, y: 0 },
   location: { x: 200, y: 200 },
 });
-
-player.set({ name: "playerControl" });
+player.set({ name: "playerControl", rate: 0.5 });
+player.set({ name: "friction", coefficient: 0.25 });
 
 mainLoop(
   [
@@ -270,8 +271,9 @@ mainLoop(
   ],
   [
     new DisplaySystem(),
-    new CollisionSystem(),
     new MomentumSystem(),
+    new CollisionSystem(),
     new PlayerControlSystem(),
+    new FrictionSystem(),
   ]
 );

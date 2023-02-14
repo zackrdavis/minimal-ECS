@@ -2,12 +2,7 @@ import { Entity } from "../ecs";
 import { processEntitiesWith } from "./shared";
 
 export class PlayerControlSystem {
-  keys: {
-    ArrowUp: boolean;
-    ArrowDown: boolean;
-    ArrowLeft: boolean;
-    ArrowRight: boolean;
-  } = {
+  keys = {
     ArrowUp: false,
     ArrowDown: false,
     ArrowLeft: false,
@@ -35,10 +30,11 @@ export class PlayerControlSystem {
   update(entities: Entity[]) {
     processEntitiesWith(["playerControl", "velocity"], entities, (entity) => {
       const { x, y } = entity.get("velocity");
+      const { rate } = entity.get("playerControl");
 
       const newVel = {
-        x: x + (this.keys.ArrowRight ? 1 : this.keys.ArrowLeft ? -1 : 0),
-        y: y + (this.keys.ArrowDown ? 1 : this.keys.ArrowUp ? -1 : 0),
+        x: x + (this.keys.ArrowRight ? rate : this.keys.ArrowLeft ? -rate : 0),
+        y: y + (this.keys.ArrowDown ? rate : this.keys.ArrowUp ? -rate : 0),
       };
 
       entity.set({ name: "velocity", ...newVel });
