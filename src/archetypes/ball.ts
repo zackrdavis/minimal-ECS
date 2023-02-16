@@ -5,17 +5,14 @@ type XY = {
   y: number;
 };
 
-export const archBall = ({
-  color,
-  diameter,
-  location,
-  velocity,
-}: {
+type Ball = {
   color: string;
   diameter: number;
   location: XY;
   velocity: XY;
-}) => {
+};
+
+export const archBall = ({ color, diameter, location, velocity }: Ball) => {
   return new Entity([
     {
       name: "style",

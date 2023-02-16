@@ -30,11 +30,23 @@ export class PlayerControlSystem {
   update(entities: Entity[]) {
     processEntitiesWith(["playerControl", "velocity"], entities, (entity) => {
       const { x, y } = entity.get("velocity");
-      const { rate } = entity.get("playerControl");
+      const { acceleration, maxSpeed } = entity.get("playerControl");
 
       const newVel = {
-        x: x + (this.keys.ArrowRight ? rate : this.keys.ArrowLeft ? -rate : 0),
-        y: y + (this.keys.ArrowDown ? rate : this.keys.ArrowUp ? -rate : 0),
+        x:
+          x +
+          (this.keys.ArrowRight
+            ? acceleration
+            : this.keys.ArrowLeft
+            ? -acceleration
+            : 0),
+        y:
+          y +
+          (this.keys.ArrowDown
+            ? acceleration
+            : this.keys.ArrowUp
+            ? -acceleration
+            : 0),
       };
 
       entity.set({ name: "velocity", ...newVel });

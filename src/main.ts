@@ -1,28 +1,14 @@
 import "./style.css";
-import { mainLoop, Entity } from "./ecs";
-import { IncrementSystem } from "./systems/shared";
+import { mainLoop } from "./ecs";
+
+import { archBall } from "./archetypes/ball";
+import { archWall } from "./archetypes/wall";
+
 import { DisplaySystem } from "./systems/display";
 import { MomentumSystem } from "./systems/momentum";
 import { CollisionSystem } from "./systems/collision";
 import { PlayerControlSystem } from "./systems/playerControl";
 import { FrictionSystem } from "./systems/friction";
-import { archBall } from "./archetypes/ball";
-
-const incrEntity = new Entity([
-  {
-    name: "integer",
-    value: 0,
-  },
-]);
-
-const player = archBall({
-  color: "tomato",
-  diameter: 20,
-  velocity: { x: 0, y: 0 },
-  location: { x: 200, y: 200 },
-});
-player.set({ name: "playerControl", rate: 0.5 });
-player.set({ name: "friction", coefficient: 0.25 });
 
 const ball1 = archBall({
   color: "green",
@@ -52,101 +38,38 @@ const ball4 = archBall({
   velocity: { x: -2, y: -2 },
 });
 
-const topWall = new Entity([
-  {
-    name: "style",
-    width: 460,
-    height: 10,
-    color: "blue",
-  },
-  {
-    name: "collision",
-    width: 460,
-    height: 10,
-  },
-  {
-    name: "location",
-    x: 5,
-    y: 60,
-  },
-  {
-    name: "velocity",
-    x: 0,
-    y: 0,
-  },
-]);
+const topWall = archWall({
+  dims: { x: 460, y: 10 },
+  location: { x: 5, y: 60 },
+  color: "blue",
+});
 
-const rightWall = new Entity([
-  {
-    name: "style",
-    width: 20,
-    height: 400,
-    color: "blue",
-  },
-  {
-    name: "collision",
-    width: 20,
-    height: 400,
-  },
-  {
-    name: "location",
-    x: 460,
-    y: 80,
-  },
-  {
-    name: "velocity",
-    x: 0,
-    y: 0,
-  },
-]);
+const rightWall = archWall({
+  dims: { x: 20, y: 400 },
+  location: { x: 460, y: 80 },
+  color: "blue",
+});
 
-const bottomWall = new Entity([
-  {
-    name: "style",
-    width: 400,
-    height: 10,
-    color: "blue",
-  },
-  {
-    name: "collision",
-    width: 400,
-    height: 10,
-  },
-  {
-    name: "location",
-    x: 50,
-    y: 460,
-  },
-  {
-    name: "velocity",
-    x: 0,
-    y: 0,
-  },
-]);
+const bottomWall = archWall({
+  dims: { x: 400, y: 10 },
+  location: { x: 50, y: 460 },
+  color: "blue",
+});
 
-const leftWall = new Entity([
-  {
-    name: "style",
-    width: 20,
-    height: 400,
-    color: "blue",
-  },
-  {
-    name: "location",
-    x: 10,
-    y: 80,
-  },
-  {
-    name: "collision",
-    width: 20,
-    height: 400,
-  },
-  {
-    name: "velocity",
-    x: 0,
-    y: 0,
-  },
-]);
+const leftWall = archWall({
+  dims: { x: 20, y: 400 },
+  location: { x: 10, y: 80 },
+  color: "blue",
+});
+
+const player = archBall({
+  color: "tomato",
+  diameter: 20,
+  velocity: { x: 0, y: 0 },
+  location: { x: 200, y: 200 },
+});
+player.set({ name: "playerControl", acceleration: 4, maxSpeed: 2 });
+player.set({ name: "friction", coefficient: 3 });
 
 mainLoop(
   [
@@ -159,7 +82,6 @@ mainLoop(
     rightWall,
     bottomWall,
     leftWall,
-    incrEntity,
   ],
   [
     new DisplaySystem(),
