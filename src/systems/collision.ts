@@ -8,9 +8,12 @@ export class CollisionSystem {
     const newVelocities: { x: number; y: number }[] = [];
 
     processEntitiesWith(
-      ["collision", "location", "velocity"],
+      ["collision", "location"],
       entities,
-      (entity1, peers) => {
+      (entity1, otherEntities) => {
+        // skip entities without velocity
+        if (!entity1.has("velocity")) return;
+
         const { x: x1, y: y1 } = entity1.get("location");
         const { x: vx1, y: vy1 } = entity1.get("velocity");
         const { width: width1, height: height1 } = entity1.get("collision");
@@ -22,10 +25,15 @@ export class CollisionSystem {
         const top1 = y1 + vy1;
         const bottom1 = y1 + height1 + vy1;
 
-        // compare edges with all peer entities
-        for (const entity2 of peers) {
+        // compare edges with all other entities
+        for (const entity2 of otherEntities) {
+          const immobile2 = !entity2.has("velocity");
+
           const { x: x2, y: y2 } = entity2.get("location");
-          const { x: vx2, y: vy2 } = entity2.get("velocity");
+
+          // for entities without velocity, x:0 y:0
+          const { x: vx2, y: vy2 } = entity2.get("velocity") || { x: 0, y: 0 };
+
           const { width: width2, height: height2 } = entity2.get("collision");
 
           const left2 = x2 + vx2;
@@ -53,27 +61,26 @@ export class CollisionSystem {
             yOverlap = bottom1 - top2;
           }
 
-          const immobile1 = vx1 == 0 && vy1 == 0;
-          const immobile2 = vx2 == 0 && vy2 == 0;
+          // const immobile1 = vx1 == 0 && vy1 == 0;
 
           if (xOverlap && yOverlap) {
             if (yOverlap > xOverlap) {
               // collision along y axis
               newVel = {
-                x: immobile1 ? 0 : immobile2 ? -vx1 : vx2,
+                x: immobile2 ? -vx1 : vx2,
                 y: vy1,
               };
             } else if (xOverlap > yOverlap) {
               // collision along x axis
               newVel = {
-                y: immobile1 ? 0 : immobile2 ? -vy1 : vy2,
+                y: immobile2 ? -vy1 : vy2,
                 x: vx1,
               };
             } else {
               // corner collision
               newVel = {
-                y: immobile1 ? 0 : immobile2 ? -vy1 : vy2,
-                x: immobile1 ? 0 : immobile2 ? -vx1 : vx2,
+                y: immobile2 ? -vy1 : vy2,
+                x: immobile2 ? -vx1 : vx2,
               };
             }
           }

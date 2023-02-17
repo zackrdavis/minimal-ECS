@@ -71,7 +71,7 @@ const player = archBall({
 player.set({
   name: "playerControl",
   acceleration: 1,
-  deceleration: 1,
+  deceleration: 0.1,
   maxSpeed: 3,
 });
 

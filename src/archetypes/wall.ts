@@ -29,9 +29,4 @@ export const archWall = ({ color, dims, location }: Wall) =>
       x: location.x,
       y: location.y,
     },
-    {
-      name: "velocity",
-      x: 0,
-      y: 0,
-    },
   ]);
