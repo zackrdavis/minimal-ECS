@@ -13,6 +13,7 @@ type Wall = {
 
 export const archWall = ({ color, dims, location }: Wall) =>
   ({
+    id: Date.now() + Math.random(),
     style: {
       width: dims.x,
       height: dims.y,

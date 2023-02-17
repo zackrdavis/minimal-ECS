@@ -9,6 +9,7 @@ import { FrictionSystem } from "./systems/friction";
 import { ZombieVirus } from "./systems/contagion";
 
 const topWall = {
+  id: Date.now() + Math.random(),
   style: {
     width: 460,
     height: 20,
@@ -25,6 +26,7 @@ const topWall = {
 };
 
 const rightWall = {
+  id: Date.now() + Math.random(),
   style: {
     width: 20,
     height: 580,
@@ -41,6 +43,7 @@ const rightWall = {
 };
 
 const bottomWall = {
+  id: Date.now() + Math.random(),
   style: {
     width: 420,
     height: 20,
@@ -57,6 +60,7 @@ const bottomWall = {
 };
 
 const leftWall = {
+  id: Date.now() + Math.random(),
   style: {
     width: 20,
     height: 590,
@@ -73,7 +77,7 @@ const leftWall = {
 };
 
 const square1 = archSquare({
-  color: "pink",
+  color: "magenta",
   diameter: 20,
   location: { x: 250, y: 250 },
   velocity: { x: -1, y: -1 },
@@ -108,16 +112,16 @@ const square5 = archSquare({
 });
 square5.zombieVirus = true;
 
-const player = archSquare({
+const square6 = archSquare({
   color: "tomato",
   diameter: 20,
   velocity: { x: 0, y: 0 },
   location: { x: 200, y: 200 },
 });
-player.friction = {
+square6.friction = {
   coefficient: 0.1,
 };
-player.playerControl = {
+square6.playerControl = {
   acceleration: 1,
   maxSpeed: 3,
 };
@@ -139,18 +143,18 @@ mainLoop(
     square3,
     square4,
     square5,
+    square6,
     topWall,
     rightWall,
     bottomWall,
     leftWall,
-    player,
   ],
   [
     new DisplaySystem(),
-    // new MomentumSystem(),
-    // new CollisionSystem(),
-    // new PlayerControlSystem(),
-    // new FrictionSystem(),
-    // new ZombieVirus(),
+    new MomentumSystem(),
+    new CollisionSystem(),
+    new PlayerControlSystem(),
+    new FrictionSystem(),
+    new ZombieVirus(),
   ]
 );

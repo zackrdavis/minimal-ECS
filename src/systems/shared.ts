@@ -1,16 +1,18 @@
-type XY = {
-  x: number;
-  y: number;
-};
-
 export type Ent = {
+  id: number;
   style?: {
     color: string;
     width: number;
     height: number;
   };
-  location?: XY;
-  velocity?: XY;
+  location?: {
+    x: number;
+    y: number;
+  };
+  velocity?: {
+    x: number;
+    y: number;
+  };
   collision?: {
     width: number;
     height: number;
@@ -23,11 +25,6 @@ export type Ent = {
     coefficient: number;
   };
   zombieVirus?: boolean;
-};
-
-export type TComponent = {
-  name: string; // position, health, etc.
-  [key: string]: any; // all actual data, e.g. health: 100
 };
 
 export type TSystem = {

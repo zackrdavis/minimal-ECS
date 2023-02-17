@@ -14,6 +14,7 @@ type Square = {
 
 export const archSquare = ({ color, diameter, location, velocity }: Square) =>
   ({
+    id: Date.now() + Math.random(),
     style: {
       width: diameter,
       height: diameter,
@@ -32,6 +33,6 @@ export const archSquare = ({ color, diameter, location, velocity }: Square) =>
       height: diameter,
     },
     friction: {
-      coefficient: 0.003,
+      coefficient: 0.001,
     },
   } as Ent);
