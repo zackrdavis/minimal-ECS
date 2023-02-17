@@ -1,5 +1,5 @@
 import "./style.css";
-import { Entity, TSystem } from "./ecs";
+import { TSystem } from "./ecs";
 
 import { archBall } from "./archetypes/ball";
 import { archWall } from "./archetypes/wall";
@@ -69,58 +69,10 @@ const player = archBall({
   velocity: { x: 0, y: 0 },
   location: { x: 200, y: 200 },
 });
-player.set({
-  name: "playerControl",
+player.playerControl = {
   acceleration: 1,
   deceleration: 0.1,
   maxSpeed: 3,
-});
-
-const obj1 = {
-  id: Date.now(),
-  style: {
-    width: 10,
-    height: 10,
-    color: "blue",
-  },
-  location: {
-    x: 100,
-    y: 100,
-  },
-  velocity: {
-    x: 1,
-    y: -1,
-  },
-};
-
-const obj2 = {
-  id: Date.now() + 1,
-  style: {
-    width: 20,
-    height: 20,
-    color: "green",
-  },
-  location: {
-    x: 200,
-    y: 200,
-  },
-  velocity: {
-    x: -1,
-    y: 1,
-  },
-};
-
-const hWall1 = {
-  id: Date.now() + 2,
-  style: {
-    width: 500,
-    height: 20,
-    color: "grey",
-  },
-  location: {
-    x: 0,
-    y: 0,
-  },
 };
 
 const mainLoop = (entities: Ent[], systems: TSystem[]) => {
@@ -135,18 +87,15 @@ const mainLoop = (entities: Ent[], systems: TSystem[]) => {
 
 mainLoop(
   [
-    // ball1,
-    // ball2,
-    // ball3,
-    // ball4,
-    // topWall,
-    // rightWall,
-    // bottomWall,
-    // leftWall,
+    ball1,
+    ball2,
+    ball3,
+    ball4,
+    topWall,
+    rightWall,
+    bottomWall,
+    leftWall,
     // player,
-    obj1,
-    obj2,
-    hWall1,
   ],
   [
     new DisplaySystem(),

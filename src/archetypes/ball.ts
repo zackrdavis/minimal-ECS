@@ -1,4 +1,4 @@
-import { Entity } from "../ecs";
+import { Ent } from "../systems/shared";
 
 type XY = {
   x: number;
@@ -12,28 +12,23 @@ type Ball = {
   velocity: XY;
 };
 
-export const archBall = ({ color, diameter, location, velocity }: Ball) => {
-  return new Entity([
-    {
-      name: "style",
+export const archBall = ({ color, diameter, location, velocity }: Ball) =>
+  ({
+    style: {
       width: diameter,
       height: diameter,
       color: color,
     },
-    {
-      name: "location",
+    location: {
       x: location.x,
       y: location.y,
     },
-    {
-      name: "velocity",
+    velocity: {
       x: velocity.x,
       y: velocity.y,
     },
-    {
-      name: "collision",
+    collision: {
       width: diameter,
       height: diameter,
     },
-  ]);
-};
+  } as Ent);

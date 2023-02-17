@@ -1,4 +1,4 @@
-import { Entity } from "../ecs";
+import { Ent } from "../systems/shared";
 
 type XY = {
   x: number;
@@ -12,21 +12,18 @@ type Wall = {
 };
 
 export const archWall = ({ color, dims, location }: Wall) =>
-  new Entity([
-    {
-      name: "style",
+  ({
+    style: {
       width: dims.x,
       height: dims.y,
       color: color,
     },
-    {
-      name: "collision",
+    collision: {
       width: dims.x,
       height: dims.y,
     },
-    {
-      name: "location",
+    location: {
       x: location.x,
       y: location.y,
     },
-  ]);
+  } as Ent);

@@ -23,11 +23,16 @@ export type Ent = {
     width: number;
     height: number;
   };
+  playerControl: {
+    acceleration: number;
+    deceleration: number;
+    maxSpeed: number;
+  };
 };
 
 /**
  * Loop through all entities to find those with the needed components.
- * Run the callback on each one.
+ * Run the callback on each one, providing both the current entity all of its peers.
  * @param components
  * @param entities
  * @param callback
@@ -35,15 +40,21 @@ export type Ent = {
 export function forEntsWith<C extends (keyof Ent)[]>(
   components: C,
   entities: Ent[],
-  callback: (Entity: Pick<Required<Ent>, C[number]> & Ent) => void
+  callback: (
+    ent: Pick<Required<Ent>, C[number]> & Ent,
+    peers: (Pick<Required<Ent>, C[number]> & Ent)[]
+  ) => void
 ) {
   const filtered = entities.filter((ent) =>
     components.every((comp) => Object.keys(ent).includes(comp))
   ) as (Pick<Required<Ent>, C[number]> & Ent)[];
 
-  filtered.forEach((ent) => {
-    callback(ent);
-  });
+  for (let i = 0; i < filtered.length; i++) {
+    const entity = filtered[i];
+    const peers = [...filtered.slice(0, i), ...filtered.slice(i + 1)];
+
+    callback(entity, peers);
+  }
 }
 
 // check if an entity has all required components
