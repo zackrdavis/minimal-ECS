@@ -2,6 +2,14 @@ import { Entity } from "../ecs";
 import { processEntitiesWith } from "./shared";
 
 export class CollisionSystem {
+  canvas: HTMLCanvasElement | null;
+  collisionEvent: any;
+
+  constructor() {
+    this.canvas = document.querySelector("#ecsCanvas");
+    this.collisionEvent = new CustomEvent("collision");
+  }
+
   update(entities: Entity[]) {
     // Collect all updated velocities.
     // Apply these all at once after all collisions are resolved.
@@ -83,6 +91,11 @@ export class CollisionSystem {
                 x: immobile2 ? -vx1 : vx2,
               };
             }
+
+            const collision = new CustomEvent("collision", {
+              detail: { ent1: entity1, ent2: entity2 },
+            });
+            this.canvas?.dispatchEvent(collision);
           }
         }
 

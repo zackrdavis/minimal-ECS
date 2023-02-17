@@ -1,5 +1,11 @@
 import { Entity } from "../ecs";
 
+export enum COMP {
+  VELOCITY = "velocity",
+  STYLE = "style",
+  CONTAGION = "contagion",
+}
+
 // check if an entity has all required components
 const entityHasAllComps = (testEntity: Entity, compNames: string[]) => {
   // loop through compNames
