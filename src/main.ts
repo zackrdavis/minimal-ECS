@@ -1,18 +1,79 @@
 import "./style.css";
-import { TSystem } from "./ecs";
-
+import { Ent, TSystem } from "./systems/shared";
 import { archSquare } from "./archetypes/square";
-import { archWall } from "./archetypes/wall";
-
 import { DisplaySystem } from "./systems/display";
 import { MomentumSystem } from "./systems/momentum";
 import { CollisionSystem } from "./systems/collision";
 import { PlayerControlSystem } from "./systems/playerControl";
 import { FrictionSystem } from "./systems/friction";
-import { Ent } from "./systems/shared";
+import { ZombieVirus } from "./systems/contagion";
+
+const topWall = {
+  style: {
+    width: 460,
+    height: 20,
+    color: "grey",
+  },
+  collision: {
+    width: 460,
+    height: 20,
+  },
+  location: {
+    x: 5,
+    y: 10,
+  },
+};
+
+const rightWall = {
+  style: {
+    width: 20,
+    height: 580,
+    color: "grey",
+  },
+  collision: {
+    width: 20,
+    height: 580,
+  },
+  location: {
+    x: 480,
+    y: 10,
+  },
+};
+
+const bottomWall = {
+  style: {
+    width: 420,
+    height: 20,
+    color: "grey",
+  },
+  collision: {
+    width: 420,
+    height: 20,
+  },
+  location: {
+    x: 40,
+    y: 570,
+  },
+};
+
+const leftWall = {
+  style: {
+    width: 20,
+    height: 590,
+    color: "grey",
+  },
+  collision: {
+    width: 20,
+    height: 590,
+  },
+  location: {
+    x: 10,
+    y: 20,
+  },
+};
 
 const square1 = archSquare({
-  color: "green",
+  color: "pink",
   diameter: 20,
   location: { x: 250, y: 250 },
   velocity: { x: -1, y: -1 },
@@ -39,29 +100,13 @@ const square4 = archSquare({
   velocity: { x: -2, y: -2 },
 });
 
-const topWall = archWall({
-  dims: { x: 460, y: 10 },
-  location: { x: 5, y: 60 },
-  color: "blue",
+const square5 = archSquare({
+  color: "green",
+  diameter: 20,
+  velocity: { x: -3, y: -0.5 },
+  location: { x: 300, y: 300 },
 });
-
-const rightWall = archWall({
-  dims: { x: 20, y: 400 },
-  location: { x: 460, y: 80 },
-  color: "blue",
-});
-
-const bottomWall = archWall({
-  dims: { x: 400, y: 10 },
-  location: { x: 50, y: 460 },
-  color: "blue",
-});
-
-const leftWall = archWall({
-  dims: { x: 20, y: 400 },
-  location: { x: 10, y: 80 },
-  color: "blue",
-});
+square5.zombieVirus = true;
 
 const player = archSquare({
   color: "tomato",
@@ -93,6 +138,7 @@ mainLoop(
     square2,
     square3,
     square4,
+    square5,
     topWall,
     rightWall,
     bottomWall,
@@ -101,9 +147,10 @@ mainLoop(
   ],
   [
     new DisplaySystem(),
-    new MomentumSystem(),
-    new CollisionSystem(),
-    new FrictionSystem(),
-    new PlayerControlSystem(),
+    // new MomentumSystem(),
+    // new CollisionSystem(),
+    // new PlayerControlSystem(),
+    // new FrictionSystem(),
+    // new ZombieVirus(),
   ]
 );
