@@ -1,4 +1,4 @@
-import { Entity } from "../ecs";
+import { Ent, forEntsWith } from "./shared";
 
 export class DisplaySystem {
   canvas: HTMLCanvasElement | null;
@@ -9,7 +9,7 @@ export class DisplaySystem {
     this.context = this.canvas?.getContext("2d");
   }
 
-  update(entities: Entity[]) {
+  update(entities: Ent[]) {
     // do nothing if no canvas
     if (!this.canvas || !this.context) {
       return;
@@ -20,15 +20,13 @@ export class DisplaySystem {
     // clear canvas for redraw
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    for (const entity of entities) {
-      if (entity.has("style") && entity.has("location")) {
-        const { width, height, color } = entity.get("style");
-        const { x, y } = entity.get("location");
+    forEntsWith(["style", "location"], entities, (ent) => {
+      const { width, height, color } = ent.style;
+      const { x, y } = ent.location;
 
-        // draw and fill the rect
-        ctx.fillStyle = color;
-        ctx.fillRect(x, y, width, height);
-      }
-    }
+      // draw and fill the rect
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, width, height);
+    });
   }
 }

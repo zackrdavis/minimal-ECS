@@ -3,7 +3,7 @@ export type TComponent = {
   [key: string]: any; // all actual data, e.g. health: 100
 };
 
-type TSystem = {
+export type TSystem = {
   update: Function;
 };
 
@@ -31,23 +31,3 @@ export class Entity {
     return this.get(name) !== undefined;
   }
 }
-
-export const mainLoop = (entities: Entity[], systems: TSystem[]) => {
-  let tickInterval = setInterval(() => {});
-
-  let ticks = 0;
-
-  const doTick = () => {
-    if (ticks >= 10000) {
-      clearInterval(tickInterval);
-    }
-
-    for (const system of systems) {
-      system.update(entities);
-    }
-
-    ticks += 1;
-  };
-
-  tickInterval = setInterval(doTick, 10);
-};
