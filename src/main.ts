@@ -1,7 +1,7 @@
 import "./style.css";
 import { TSystem } from "./ecs";
 
-import { archBall } from "./archetypes/ball";
+import { archSquare } from "./archetypes/square";
 import { archWall } from "./archetypes/wall";
 
 import { DisplaySystem } from "./systems/display";
@@ -11,28 +11,28 @@ import { PlayerControlSystem } from "./systems/playerControl";
 import { FrictionSystem } from "./systems/friction";
 import { Ent } from "./systems/shared";
 
-const ball1 = archBall({
+const square1 = archSquare({
   color: "green",
   diameter: 20,
   location: { x: 250, y: 250 },
   velocity: { x: -1, y: -1 },
 });
 
-const ball2 = archBall({
+const square2 = archSquare({
   color: "red",
   diameter: 20,
   location: { x: 290, y: 250 },
   velocity: { x: 2, y: 1 },
 });
 
-const ball3 = archBall({
+const square3 = archSquare({
   color: "orange",
   diameter: 20,
   location: { x: 300, y: 400 },
   velocity: { x: -1, y: -2 },
 });
 
-const ball4 = archBall({
+const square4 = archSquare({
   color: "purple",
   diameter: 20,
   location: { x: 240, y: 400 },
@@ -63,15 +63,17 @@ const leftWall = archWall({
   color: "blue",
 });
 
-const player = archBall({
+const player = archSquare({
   color: "tomato",
   diameter: 20,
   velocity: { x: 0, y: 0 },
   location: { x: 200, y: 200 },
 });
+player.friction = {
+  coefficient: 0.1,
+};
 player.playerControl = {
   acceleration: 1,
-  deceleration: 0.1,
   maxSpeed: 3,
 };
 
@@ -87,10 +89,10 @@ const mainLoop = (entities: Ent[], systems: TSystem[]) => {
 
 mainLoop(
   [
-    ball1,
-    ball2,
-    ball3,
-    ball4,
+    square1,
+    square2,
+    square3,
+    square4,
     topWall,
     rightWall,
     bottomWall,
@@ -101,7 +103,7 @@ mainLoop(
     new DisplaySystem(),
     new MomentumSystem(),
     new CollisionSystem(),
-    new PlayerControlSystem(),
     new FrictionSystem(),
+    new PlayerControlSystem(),
   ]
 );

@@ -1,4 +1,4 @@
-import { processEntitiesWith, COMP } from "./shared";
+import { processEntitiesWith } from "./shared";
 
 export class ContagionSystem {
   canvas: HTMLCanvasElement | null;

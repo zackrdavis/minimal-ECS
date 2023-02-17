@@ -5,14 +5,14 @@ type XY = {
   y: number;
 };
 
-type Ball = {
+type Square = {
   color: string;
   diameter: number;
   location: XY;
   velocity: XY;
 };
 
-export const archBall = ({ color, diameter, location, velocity }: Ball) =>
+export const archSquare = ({ color, diameter, location, velocity }: Square) =>
   ({
     style: {
       width: diameter,
@@ -30,5 +30,8 @@ export const archBall = ({ color, diameter, location, velocity }: Ball) =>
     collision: {
       width: diameter,
       height: diameter,
+    },
+    friction: {
+      coefficient: 0.003,
     },
   } as Ent);

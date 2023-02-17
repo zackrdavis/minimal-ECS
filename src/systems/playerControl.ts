@@ -1,5 +1,4 @@
 import { Ent, forEntsWith } from "./shared";
-import { decelerate } from "./shared";
 
 const clamp = (num: number, min: number, max: number) => {
   return Math.min(Math.max(num, min), max);
@@ -33,29 +32,17 @@ export class PlayerControlSystem {
 
   update(entities: Ent[]) {
     forEntsWith(["velocity", "playerControl"], entities, (entity) => {
-      const { x, y } = entity.velocity;
+      const { ArrowUp, ArrowDown, ArrowLeft, ArrowRight } = this.keys;
+      const { acceleration, maxSpeed } = entity.playerControl;
 
-      const { acceleration, deceleration, maxSpeed } = entity.playerControl;
-
-      const {
-        ArrowRight: right,
-        ArrowLeft: left,
-        ArrowUp: up,
-        ArrowDown: down,
-      } = this.keys;
-
-      if ((x != 0 || y != 0) && !right && !left && !up && !down) {
-        // if no keys pressed and moving, decelerate
-        entity.velocity = {
-          x: decelerate(x, deceleration),
-          y: decelerate(y, deceleration),
-        };
-      } else {
+      if (ArrowRight || ArrowLeft || ArrowDown || ArrowUp) {
         // accelerate up to maxSpeed
         const { x, y } = entity.velocity;
 
-        const newXVel = x + (right ? acceleration : left ? -acceleration : 0);
-        const newYVel = y + (down ? acceleration : up ? -acceleration : 0);
+        const newXVel =
+          x + (ArrowRight ? acceleration : ArrowLeft ? -acceleration : 0);
+        const newYVel =
+          y + (ArrowDown ? acceleration : ArrowUp ? -acceleration : 0);
 
         entity.velocity = {
           x: clamp(newXVel, -maxSpeed, maxSpeed),

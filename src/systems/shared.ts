@@ -1,11 +1,5 @@
 import { Entity } from "../ecs";
 
-export enum COMP {
-  VELOCITY = "velocity",
-  STYLE = "style",
-  CONTAGION = "contagion",
-}
-
 type XY = {
   x: number;
   y: number;
@@ -25,8 +19,10 @@ export type Ent = {
   };
   playerControl: {
     acceleration: number;
-    deceleration: number;
     maxSpeed: number;
+  };
+  friction: {
+    coefficient: number;
   };
 };
 
