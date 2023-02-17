@@ -27,11 +27,11 @@ export class CollisionSystem {
         const { width: width1, height: height1 } = entity1.get("collision");
         let newVel = { x: vx1, y: vy1 };
 
-        const left1 = x1 + vx1;
-        const right1 = x1 + width1 + vx1;
+        const left1 = x1;
+        const right1 = x1 + width1;
 
-        const top1 = y1 + vy1;
-        const bottom1 = y1 + height1 + vy1;
+        const top1 = y1;
+        const bottom1 = y1 + height1;
 
         // compare edges with all other entities
         for (const entity2 of otherEntities) {
@@ -44,11 +44,11 @@ export class CollisionSystem {
 
           const { width: width2, height: height2 } = entity2.get("collision");
 
-          const left2 = x2 + vx2;
-          const right2 = x2 + width2 + vx2;
+          const left2 = x2;
+          const right2 = x2 + width2;
 
-          const top2 = y2 + vy2;
-          const bottom2 = y2 + height2 + vy2;
+          const top2 = y2;
+          const bottom2 = y2 + height2;
 
           let xOverlap = 0;
           let yOverlap = 0;
@@ -68,8 +68,6 @@ export class CollisionSystem {
             // bottom1 on top2
             yOverlap = bottom1 - top2;
           }
-
-          // const immobile1 = vx1 == 0 && vy1 == 0;
 
           if (xOverlap && yOverlap) {
             if (yOverlap > xOverlap) {
