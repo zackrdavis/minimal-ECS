@@ -1,5 +1,4 @@
 import { processEntitiesWith, COMP } from "./shared";
-import { Entity } from "../ecs";
 
 export class ContagionSystem {
   canvas: HTMLCanvasElement | null;
@@ -34,9 +33,5 @@ export class ContagionSystem {
     });
   }
 
-  update(entities: Entity[]) {
-    // processEntitiesWith([COMP.STYLE, COMP.VELOCITY], entities, (entity) => {
-    //   //const { x, y } = entity.get(COMP.VELOCITY);
-    // });
-  }
+  update() {}
 }

@@ -95,7 +95,7 @@ mainLoop(
     rightWall,
     bottomWall,
     leftWall,
-    // player,
+    player,
   ],
   [
     new DisplaySystem(),

@@ -1,4 +1,4 @@
-import { Ent, forEntsWith, processEntitiesWith } from "./shared";
+import { Ent, forEntsWith } from "./shared";
 
 export class CollisionSystem {
   canvas: HTMLCanvasElement | null;
