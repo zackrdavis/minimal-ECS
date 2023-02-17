@@ -1,15 +1,5 @@
 import { Entity } from "../ecs";
 
-export class IncrementSystem {
-  update(entities: Entity[]) {
-    processEntitiesWith(["integer"], entities, (entity) => {
-      const incrementComponent = entity.get("integer");
-      console.log(incrementComponent.value);
-      incrementComponent.value += 1;
-    });
-  }
-}
-
 // check if an entity has all required components
 const entityHasAllComps = (testEntity: Entity, compNames: string[]) => {
   // loop through compNames
@@ -34,5 +24,18 @@ export const processEntitiesWith = (
     const peers = [...validEntities.slice(0, i), ...validEntities.slice(i + 1)];
 
     callback(entity, peers);
+  }
+};
+
+/**
+ * Move speed toward 0 by [friction], stopping at zero.
+ * @param speed
+ * @param friction
+ */
+export const decelerate = (speed: number, friction: number) => {
+  if (speed >= 0) {
+    return Math.max(speed - friction, 0);
+  } else {
+    return Math.min(speed + friction, 0);
   }
 };

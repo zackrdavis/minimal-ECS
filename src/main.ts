@@ -68,8 +68,12 @@ const player = archBall({
   velocity: { x: 0, y: 0 },
   location: { x: 200, y: 200 },
 });
-player.set({ name: "playerControl", acceleration: 4, maxSpeed: 2 });
-player.set({ name: "friction", coefficient: 3 });
+player.set({
+  name: "playerControl",
+  acceleration: 1,
+  deceleration: 1,
+  maxSpeed: 3,
+});
 
 mainLoop(
   [

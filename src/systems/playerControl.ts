@@ -1,5 +1,10 @@
 import { Entity } from "../ecs";
 import { processEntitiesWith } from "./shared";
+import { decelerate } from "./shared";
+
+const clamp = (num: number, min: number, max: number) => {
+  return Math.min(Math.max(num, min), max);
+};
 
 export class PlayerControlSystem {
   keys = {
@@ -30,26 +35,37 @@ export class PlayerControlSystem {
   update(entities: Entity[]) {
     processEntitiesWith(["playerControl", "velocity"], entities, (entity) => {
       const { x, y } = entity.get("velocity");
-      const { acceleration, maxSpeed } = entity.get("playerControl");
 
-      const newVel = {
-        x:
-          x +
-          (this.keys.ArrowRight
-            ? acceleration
-            : this.keys.ArrowLeft
-            ? -acceleration
-            : 0),
-        y:
-          y +
-          (this.keys.ArrowDown
-            ? acceleration
-            : this.keys.ArrowUp
-            ? -acceleration
-            : 0),
-      };
+      const { acceleration, deceleration, maxSpeed } =
+        entity.get("playerControl");
 
-      entity.set({ name: "velocity", ...newVel });
+      const {
+        ArrowRight: right,
+        ArrowLeft: left,
+        ArrowUp: up,
+        ArrowDown: down,
+      } = this.keys;
+
+      if ((x != 0 || y != 0) && !right && !left && !up && !down) {
+        // if no keys pressed and moving, decelerate
+        entity.set({
+          name: "velocity",
+          x: decelerate(x, deceleration),
+          y: decelerate(y, deceleration),
+        });
+      } else {
+        // accelerate up to maxSpeed
+        const { x, y } = entity.get("velocity");
+
+        const newXVel = x + (right ? acceleration : left ? -acceleration : 0);
+        const newYVel = y + (down ? acceleration : up ? -acceleration : 0);
+
+        entity.set({
+          name: "velocity",
+          x: clamp(newXVel, -maxSpeed, maxSpeed),
+          y: clamp(newYVel, -maxSpeed, maxSpeed),
+        });
+      }
     });
   }
 }
