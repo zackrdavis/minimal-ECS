@@ -1,4 +1,4 @@
-import { Ent } from "../systems/shared";
+import { Ent, uniqueNumber } from "../systems/shared";
 
 type XY = {
   x: number;
@@ -13,13 +13,13 @@ type Wall = {
 
 export const archWall = ({ color, dims, location }: Wall) =>
   ({
-    id: Date.now() + Math.random(),
+    id: uniqueNumber(),
     style: {
       width: dims.x,
       height: dims.y,
       color: color,
     },
-    collision: {
+    collisionBox: {
       width: dims.x,
       height: dims.y,
     },

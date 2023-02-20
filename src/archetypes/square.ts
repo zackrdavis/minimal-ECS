@@ -1,4 +1,4 @@
-import { Ent } from "../systems/shared";
+import { Ent, uniqueNumber } from "../systems/shared";
 
 type XY = {
   x: number;
@@ -14,7 +14,7 @@ type Square = {
 
 export const archSquare = ({ color, diameter, location, velocity }: Square) =>
   ({
-    id: Date.now() + Math.random(),
+    id: uniqueNumber(),
     style: {
       width: diameter,
       height: diameter,
@@ -28,7 +28,7 @@ export const archSquare = ({ color, diameter, location, velocity }: Square) =>
       x: velocity.x,
       y: velocity.y,
     },
-    collision: {
+    collisionBox: {
       width: diameter,
       height: diameter,
     },

@@ -1,21 +1,23 @@
 import "./style.css";
-import { Ent, TSystem } from "./systems/shared";
+import { Ent, TSystem, uniqueNumber } from "./systems/shared";
 import { archSquare } from "./archetypes/square";
 import { DisplaySystem } from "./systems/display";
 import { MomentumSystem } from "./systems/momentum";
 import { CollisionSystem } from "./systems/collision";
 import { PlayerControlSystem } from "./systems/playerControl";
 import { FrictionSystem } from "./systems/friction";
-import { ZombieVirus } from "./systems/contagion";
+import { ZombieVirus } from "./systems/zombieVirus";
+import { ResetCollisions } from "./systems/resetCollisions";
+import { ImpactSystem } from "./systems/Impact";
 
 const topWall = {
-  id: Date.now() + Math.random(),
+  id: uniqueNumber(),
   style: {
     width: 460,
     height: 20,
     color: "grey",
   },
-  collision: {
+  collisionBox: {
     width: 460,
     height: 20,
   },
@@ -26,13 +28,13 @@ const topWall = {
 };
 
 const rightWall = {
-  id: Date.now() + Math.random(),
+  id: uniqueNumber(),
   style: {
     width: 20,
     height: 580,
     color: "grey",
   },
-  collision: {
+  collisionBox: {
     width: 20,
     height: 580,
   },
@@ -43,13 +45,13 @@ const rightWall = {
 };
 
 const bottomWall = {
-  id: Date.now() + Math.random(),
+  id: uniqueNumber(),
   style: {
     width: 420,
     height: 20,
     color: "grey",
   },
-  collision: {
+  collisionBox: {
     width: 420,
     height: 20,
   },
@@ -60,13 +62,13 @@ const bottomWall = {
 };
 
 const leftWall = {
-  id: Date.now() + Math.random(),
+  id: uniqueNumber(),
   style: {
     width: 20,
     height: 590,
     color: "grey",
   },
-  collision: {
+  collisionBox: {
     width: 20,
     height: 590,
   },
@@ -153,8 +155,10 @@ mainLoop(
     new DisplaySystem(),
     new MomentumSystem(),
     new CollisionSystem(),
+    new ImpactSystem(),
     new PlayerControlSystem(),
     new FrictionSystem(),
     new ZombieVirus(),
+    new ResetCollisions(),
   ]
 );
