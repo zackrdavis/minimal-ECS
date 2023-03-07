@@ -9,6 +9,8 @@ Implementation of a [Entity-Component-System](https://en.wikipedia.org/wiki/Enti
 
 This implementation renders to `<canvas>` but otherwise avoids external APIs. For example, collision events propagate using transient components instead of DOM events.
 
+[Live Demo](https://zackrdavis.github.io/minimal-ecs/)
+
 Inspired by blog posts:
 
 - [Creating a Roguelike in Python + TDL, Part 1: Entity-Component System](https://nightblade9.github.io/python-zone/2018/creating-a-roguelike-in-python-tdl-part-1.html)
