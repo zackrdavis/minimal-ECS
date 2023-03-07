@@ -8,7 +8,7 @@ import { PlayerControlSystem } from "./systems/playerControl";
 import { FrictionSystem } from "./systems/friction";
 import { ZombieVirus } from "./systems/zombieVirus";
 import { ResetCollisions } from "./systems/resetCollisions";
-import { ImpactSystem } from "./systems/Impact";
+import { ImpactSystem } from "./systems/impact";
 
 const topWall = {
   id: uniqueNumber(),
