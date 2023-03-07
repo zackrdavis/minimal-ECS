@@ -1,5 +1,6 @@
 export type Ent = {
   id: number;
+  integer?: number;
   style?: {
     color: string;
     width: number;
