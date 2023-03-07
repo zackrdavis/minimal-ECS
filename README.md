@@ -1,6 +1,6 @@
 # Minimal ECS
 
-[![Node.js CI](https://github.com/zackrdavis/minimal-ECS/actions/workflows/node.js.yml/badge.svg)](https://github.com/zackrdavis/minimal-ECS/actions/workflows/node.js.yml)
+[![unit tests](https://github.com/zackrdavis/minimal-ECS/actions/workflows/node.js.yml/badge.svg)](https://github.com/zackrdavis/minimal-ECS/actions/workflows/node.js.yml)
 
 Implementation of a [Entity-Component-System](https://en.wikipedia.org/wiki/Entity_component_system) architecture in TypeScript.
 
