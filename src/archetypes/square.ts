@@ -1,4 +1,4 @@
-import { Ent, uniqueNumber } from "../systems/shared";
+import { Ent } from "../systems/shared";
 
 type XY = {
   x: number;
@@ -14,7 +14,7 @@ type Square = {
 
 export const archSquare = ({ color, diameter, location, velocity }: Square) =>
   ({
-    id: uniqueNumber(),
+    id: crypto.randomUUID(),
     style: {
       width: diameter,
       height: diameter,

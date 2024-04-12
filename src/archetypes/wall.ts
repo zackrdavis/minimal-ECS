@@ -1,4 +1,4 @@
-import { Ent, uniqueNumber } from "../systems/shared";
+import { Ent } from "../systems/shared";
 
 type XY = {
   x: number;
@@ -13,7 +13,7 @@ type Wall = {
 
 export const archWall = ({ color, dims, location }: Wall) =>
   ({
-    id: uniqueNumber(),
+    id: crypto.randomUUID(),
     style: {
       width: dims.x,
       height: dims.y,

@@ -1,5 +1,5 @@
 import "./style.css";
-import { Ent, TSystem, uniqueNumber } from "./systems/shared";
+import { Ent, TSystem } from "./systems/shared";
 import { archSquare } from "./archetypes/square";
 import { DisplaySystem } from "./systems/display";
 import { MomentumSystem } from "./systems/momentum";
@@ -85,7 +85,7 @@ const square5 = archSquare({
   color: "green",
   diameter: 20,
   velocity: { x: -3, y: -0.5 },
-  location: { x: 300, y: 300 },
+  location: { x: 300, y: 340 },
 });
 
 const square6 = archSquare({

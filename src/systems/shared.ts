@@ -1,5 +1,5 @@
 export type Ent = {
-  id: number;
+  id: string;
   integer?: number;
   style?: {
     color: string;
@@ -63,19 +63,3 @@ export function forEntsWith<C extends (keyof Ent)[]>(
     callback(entity, peers);
   }
 }
-
-export const uniqueNumber = () => Math.floor(Date.now() + Math.random() * 100);
-
-// // https://stackoverflow.com/a/28918947
-// export const uniqueNumber = () => {
-//   var date = Date.now();
-//   // If created at same millisecond as previous
-//   if (date <= uniqueNumber.previous) {
-//     date = ++uniqueNumber.previous;
-//   } else {
-//     uniqueNumber.previous = date;
-//   }
-//   return date;
-// };
-
-// uniqueNumber.previous = 0;
