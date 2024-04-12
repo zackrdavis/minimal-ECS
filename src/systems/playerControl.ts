@@ -1,4 +1,3 @@
-import { s } from "vitest/dist/env-afee91f0";
 import { Ent, forEntsWith } from "./shared";
 
 const clamp = (num: number, min: number, max: number) => {
