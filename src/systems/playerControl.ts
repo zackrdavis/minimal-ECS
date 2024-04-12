@@ -35,7 +35,10 @@ export class PlayerControlSystem {
       const { ArrowUp, ArrowDown, ArrowLeft, ArrowRight } = this.keys;
       const { acceleration, maxSpeed } = entity.playerControl;
 
-      if (ArrowRight || ArrowLeft || ArrowDown || ArrowUp) {
+      if (
+        (ArrowRight || ArrowLeft || ArrowDown || ArrowUp) &&
+        !entity.collisionEvent
+      ) {
         // accelerate up to maxSpeed
         const { x, y } = entity.velocity;
 

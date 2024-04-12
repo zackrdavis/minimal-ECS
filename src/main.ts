@@ -38,19 +38,19 @@ const leftWall = archWall({
 const boxWallTop = archWall({
   color: "grey",
   dims: { x: 100, y: 20 },
-  location: { x: 200, y: 200 },
+  location: { x: 200, y: 180 },
 });
 
 const boxWallRight = archWall({
   color: "grey",
   dims: { x: 20, y: 100 },
-  location: { x: 280, y: 200 },
+  location: { x: 300, y: 200 },
 });
 
 const boxWallLeft = archWall({
   color: "grey",
   dims: { x: 20, y: 100 },
-  location: { x: 200, y: 200 },
+  location: { x: 180, y: 200 },
 });
 
 const square1 = archSquare({
