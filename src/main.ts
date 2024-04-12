@@ -9,93 +9,68 @@ import { FrictionSystem } from "./systems/friction";
 import { ZombieVirus } from "./systems/zombieVirus";
 import { ResetCollisions } from "./systems/resetCollisions";
 import { ImpactSystem } from "./systems/impact";
+import { archWall } from "./archetypes/wall";
 
-const topWall = {
-  id: uniqueNumber(),
-  style: {
-    width: 460,
-    height: 20,
-    color: "grey",
-  },
-  collisionBox: {
-    width: 460,
-    height: 20,
-  },
-  location: {
-    x: 5,
-    y: 10,
-  },
-};
+const topWall = archWall({
+  color: "grey",
+  dims: { x: 600, y: 20 },
+  location: { x: 0, y: 0 },
+});
 
-const rightWall = {
-  id: uniqueNumber(),
-  style: {
-    width: 20,
-    height: 580,
-    color: "grey",
-  },
-  collisionBox: {
-    width: 20,
-    height: 580,
-  },
-  location: {
-    x: 480,
-    y: 10,
-  },
-};
+const rightWall = archWall({
+  color: "grey",
+  dims: { x: 20, y: 600 },
+  location: { x: 580, y: 0 },
+});
 
-const bottomWall = {
-  id: uniqueNumber(),
-  style: {
-    width: 420,
-    height: 20,
-    color: "grey",
-  },
-  collisionBox: {
-    width: 420,
-    height: 20,
-  },
-  location: {
-    x: 40,
-    y: 570,
-  },
-};
+const bottomWall = archWall({
+  color: "grey",
+  dims: { x: 600, y: 20 },
+  location: { x: 0, y: 580 },
+});
 
-const leftWall = {
-  id: uniqueNumber(),
-  style: {
-    width: 20,
-    height: 590,
-    color: "grey",
-  },
-  collisionBox: {
-    width: 20,
-    height: 590,
-  },
-  location: {
-    x: 10,
-    y: 20,
-  },
-};
+const leftWall = archWall({
+  color: "grey",
+  dims: { x: 20, y: 600 },
+  location: { x: 0, y: 0 },
+});
+
+const boxWallTop = archWall({
+  color: "grey",
+  dims: { x: 100, y: 20 },
+  location: { x: 200, y: 200 },
+});
+
+const boxWallRight = archWall({
+  color: "grey",
+  dims: { x: 20, y: 100 },
+  location: { x: 280, y: 200 },
+});
+
+const boxWallLeft = archWall({
+  color: "grey",
+  dims: { x: 20, y: 100 },
+  location: { x: 200, y: 200 },
+});
 
 const square1 = archSquare({
-  color: "magenta",
+  color: "tomato",
   diameter: 20,
-  location: { x: 250, y: 250 },
+  location: { x: 500, y: 500 },
   velocity: { x: -1, y: -1 },
 });
 
 const square2 = archSquare({
   color: "red",
   diameter: 20,
-  location: { x: 290, y: 250 },
+  location: { x: 350, y: 250 },
   velocity: { x: 2, y: 1 },
 });
 
 const square3 = archSquare({
   color: "orange",
   diameter: 20,
-  location: { x: 300, y: 400 },
+  location: { x: 400, y: 400 },
   velocity: { x: -1, y: -2 },
 });
 
@@ -112,17 +87,20 @@ const square5 = archSquare({
   velocity: { x: -3, y: -0.5 },
   location: { x: 300, y: 300 },
 });
-square5.zombieVirus = true;
 
 const square6 = archSquare({
-  color: "tomato",
+  color: "magenta",
   diameter: 20,
   velocity: { x: 0, y: 0 },
-  location: { x: 200, y: 200 },
+  location: { x: 240, y: 240 },
 });
+
+square5.zombieVirus = true;
+
 square6.friction = {
   coefficient: 0.1,
 };
+
 square6.playerControl = {
   acceleration: 1,
   maxSpeed: 3,
@@ -150,6 +128,9 @@ mainLoop(
     rightWall,
     bottomWall,
     leftWall,
+    boxWallTop,
+    boxWallRight,
+    boxWallLeft,
   ],
   [
     new DisplaySystem(),
