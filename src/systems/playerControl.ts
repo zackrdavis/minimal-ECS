@@ -19,8 +19,6 @@ export class PlayerControlSystem {
 
   constructor() {
     window.addEventListener("keydown", (e) => {
-      console.log(e.key);
-
       const pressedKey = e.key as keyof typeof this.keys;
 
       if (pressedKey in this.keys) {
