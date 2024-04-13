@@ -1,5 +1,7 @@
 import { expect, test } from "vitest";
 import { MomentumSystem } from "./momentum";
+// for node.js env
+const crypto = require("crypto");
 
 test("momentum_system_updates_location", () => {
   const momentumSystem = new MomentumSystem();
