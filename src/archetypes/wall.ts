@@ -5,19 +5,18 @@ type XY = {
   y: number;
 };
 
-type Wall = {
-  color: string;
+type Wall = Omit<Ent, "id"> & {
   dims: XY;
   location: XY;
 };
 
-export const archWall = ({ color, dims, location }: Wall) =>
+export const archWall = ({ dims, location, ...extras }: Wall) =>
   ({
     id: crypto.randomUUID(),
     style: {
       width: dims.x,
       height: dims.y,
-      color: color,
+      color: "gray",
     },
     collisionBox: {
       width: dims.x,
@@ -27,4 +26,5 @@ export const archWall = ({ color, dims, location }: Wall) =>
       x: location.x,
       y: location.y,
     },
+    ...extras,
   } as Ent);

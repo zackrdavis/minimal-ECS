@@ -5,14 +5,20 @@ type XY = {
   y: number;
 };
 
-type Square = {
+type Square = Omit<Ent, "id"> & {
   color: string;
   diameter: number;
   location: XY;
   velocity: XY;
 };
 
-export const archSquare = ({ color, diameter, location, velocity }: Square) =>
+export const archSquare = ({
+  color,
+  diameter,
+  location,
+  velocity,
+  ...extras
+}: Square) =>
   ({
     id: crypto.randomUUID(),
     style: {
@@ -35,4 +41,5 @@ export const archSquare = ({ color, diameter, location, velocity }: Square) =>
     friction: {
       coefficient: 0.001,
     },
+    ...extras,
   } as Ent);
