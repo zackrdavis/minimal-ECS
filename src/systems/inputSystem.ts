@@ -26,13 +26,15 @@ export const inputSystem = (allEntities: Entity[]) => {
   if (!listenerSet) {
     // Setup keyboard listeners.
     window.addEventListener("keydown", (e) => {
-      if (e.code in pressedKeys) pressedKeys[e.code] = true;
-      e.preventDefault();
+      if (!e.metaKey && e.code in pressedKeys) {
+        pressedKeys[e.code] = true;
+      }
     });
 
     window.addEventListener("keyup", (e) => {
-      if (e.code in pressedKeys) pressedKeys[e.code] = false;
-      e.preventDefault();
+      if (!e.metaKey && e.code in pressedKeys) {
+        pressedKeys[e.code] = false;
+      }
     });
 
     listenerSet = true;
