@@ -1,3 +1,6 @@
+// Make one or more properties required.
+export type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
+
 type Collision = {
   otherEntId: string;
   xOverlap: number;

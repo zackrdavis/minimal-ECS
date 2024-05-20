@@ -1,7 +1,4 @@
-import { Entity } from "./types";
-
-// Make one or more properties required.
-export type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
+import { Entity, WithRequired } from "./types";
 
 // Return a filtered list of entities having the required components.
 // Types results as Entities with specified properties required.
