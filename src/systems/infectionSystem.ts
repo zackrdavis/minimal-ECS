@@ -1,23 +1,23 @@
 import { Entity } from "../types";
+import { getEntsWithComps } from "../utils";
 
-export const infectionSystem = (entities: Entity[]) => {
+export const infectionSystem = (ents: Entity[]) => {
+  const entities = getEntsWithComps(
+    ["infectable", "appearance", "collisionBox", "id"],
+    ents
+  );
+
   for (const entity of entities) {
-    if (
-      entity.infectable &&
-      entity.appearance &&
-      entity.collisionBox?.collisions.length
-    ) {
-      for (const collision of entity.collisionBox.collisions) {
-        const otherEnt = entities.find(
-          (ent) => ent.id === collision.otherEntId
-        );
+    console.log(entity.infectable);
 
-        // Turn pink entity into a zombie.
-        if (otherEnt?.infectious) {
-          entity.infectious = true;
-          entity.infectable = false;
-          entity.appearance.color = "mediumSeaGreen";
-        }
+    for (const collision of entity.collisionBox.collisions) {
+      const otherEnt = entities.find((ent) => ent.id === collision.otherEntId);
+
+      // Turn pink entity into a zombie.
+      if (otherEnt?.infectious) {
+        entity.infectious = true;
+        entity.infectable = false;
+        entity.appearance.color = "mediumSeaGreen";
       }
     }
   }

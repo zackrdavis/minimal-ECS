@@ -1,14 +1,12 @@
 import { Entity } from "../types";
+import { getEntsWithComps } from "../utils";
 
-export const collisionSystem = (entities: Entity[]) => {
-  // Get entities with collisionBox and position.
-  const withNeeded = entities.filter(
-    (e) => e.collisionBox && e.position && e.id
-  ) as Pick<Required<Entity>, "collisionBox" | "position" | "id">[];
+export const collisionSystem = (ents: Entity[]) => {
+  const entities = getEntsWithComps(["collisionBox", "position"], ents);
 
-  withNeeded.forEach((entity1) => {
+  entities.forEach((entity1) => {
     // Get peers without the current entity.
-    const peers = withNeeded.filter((e) => e !== entity1);
+    const peers = entities.filter((e) => e !== entity1);
 
     // Reset collision events.
     entity1.collisionBox.collisions.length = 0;

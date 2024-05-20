@@ -1,3 +1,19 @@
+import { Entity } from "./types";
+
+// Make one or more properties required.
+export type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
+
+// Return a filtered list of entities having the required components.
+// Types results as Entities with specified properties required.
+export const getEntsWithComps = <RC extends (keyof Entity)[]>(
+  components: RC,
+  entities: Entity[]
+) => {
+  return entities.filter((ent) =>
+    components.every((comp) => Object.hasOwn(ent, comp))
+  ) as WithRequired<Entity, (typeof components)[number]>[];
+};
+
 // Generate a moveable square entity with some defaults.
 export const makeSquare = (opts: {
   role: "player" | "zombie" | "civilian";
