@@ -1,11 +1,11 @@
-import { renderSystem } from "./renderSystem";
-import { inputSystem } from "./inputSystem";
-import { momentumSystem } from "./momentumSystem";
-import { collisionSystem } from "./collisionSystem";
-import { reboundSystem } from "./reboundSystem";
-import { infectionSystem } from "./infectionSystem";
-import { lurchSystem } from "./lurchSystem";
-import { gameOverSystem } from "./gameOverSystem";
+import { renderSystem } from "./systems/renderSystem";
+import { inputSystem } from "./systems/inputSystem";
+import { momentumSystem } from "./systems/momentumSystem";
+import { collisionSystem } from "./systems/collisionSystem";
+import { reboundSystem } from "./systems/reboundSystem";
+import { infectionSystem } from "./systems/infectionSystem";
+import { lurchSystem } from "./systems/lurchSystem";
+import { gameOverSystem } from "./systems/gameOverSystem";
 import { entities } from "./entities";
 
 const systems = [

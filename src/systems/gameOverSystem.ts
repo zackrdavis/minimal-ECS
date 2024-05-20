@@ -1,4 +1,4 @@
-import { Entity } from "./entities";
+import { Entity } from "../types";
 
 let didWin = false;
 let didLose = false;
@@ -30,12 +30,12 @@ export const gameOverSystem = (entities: Entity[]) => {
 
   if (humans === 0 && !didWin && !didLose) {
     didLose = true;
-    entities.unshift(loseText);
+    entities.push(loseText);
   }
 
   if (atGoal >= 1 && !didWin && !didLose) {
     didWin = true;
-    entities.unshift(winText);
+    entities.push(winText);
   }
 };
 
@@ -43,13 +43,13 @@ const winText = {
   id: "message",
   appearance: {
     color: "pink",
-    width: 250,
-    height: 60,
+    width: 580,
+    height: 120,
     text: "You Win!",
   },
   position: {
-    x: 30,
-    y: 120,
+    x: 10,
+    y: 240,
   },
 };
 
@@ -57,12 +57,12 @@ const loseText = {
   id: "message",
   appearance: {
     color: "green",
-    width: 280,
-    height: 60,
+    width: 580,
+    height: 120,
     text: "You Lose!",
   },
   position: {
     x: 10,
-    y: 120,
+    y: 240,
   },
 };

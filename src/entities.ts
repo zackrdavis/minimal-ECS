@@ -1,45 +1,5 @@
 import { makeSquare, makeWall } from "./utils";
 
-type Collision = {
-  otherEntId: string;
-  xOverlap: number;
-  yOverlap: number;
-};
-
-export type Entity = {
-  // Mandatory
-  id: string;
-
-  // Optional Components
-  playerControl?: boolean;
-  appearance?: {
-    color: string;
-    width: number;
-    height: number;
-    text?: string;
-  };
-  position?: {
-    x: number;
-    y: number;
-  };
-  velocity?: {
-    x: number;
-    y: number;
-  };
-  friction?: number;
-  collisionBox?: {
-    width: number;
-    height: number;
-    collisions: Collision[];
-  };
-  rigidBody?: {
-    stuck: boolean;
-  };
-  infectable?: boolean;
-  infectious?: boolean;
-  goal?: boolean;
-};
-
 const player = makeSquare({
   role: "player",
   x: 100,
@@ -66,7 +26,7 @@ const civ3 = makeSquare({
 
 const zombie1 = makeSquare({
   role: "zombie",
-  x: 120,
+  x: 400,
   y: 140,
   vx: -0,
   vy: 1.5,
@@ -78,6 +38,22 @@ const zombie2 = makeSquare({
   y: 200,
   vx: 0.8,
   vy: -1,
+});
+
+const zombie3 = makeSquare({
+  role: "zombie",
+  x: 350,
+  y: 300,
+  vx: 0.8,
+  vy: -1,
+});
+
+const zombie4 = makeSquare({
+  role: "zombie",
+  x: 200,
+  y: 300,
+  vx: -2,
+  vy: 0,
 });
 
 const wallTop = makeWall({
@@ -128,14 +104,6 @@ const startWallBottom = makeWall({
   y: 150,
 });
 
-const goalWall = makeWall({
-  orientation: "y",
-  length: 50,
-  thickness: 10,
-  x: 200,
-  y: 10,
-});
-
 const midWall1 = makeWall({
   orientation: "x",
   length: 300,
@@ -144,17 +112,33 @@ const midWall1 = makeWall({
   y: 500,
 });
 
+const midWall2 = makeWall({
+  orientation: "y",
+  length: 300,
+  thickness: 10,
+  x: 240,
+  y: 130,
+});
+
+const midWall3 = makeWall({
+  orientation: "x",
+  length: 200,
+  thickness: 10,
+  x: 390,
+  y: 300,
+});
+
 const goal = {
   id: "goal",
   goal: true,
   appearance: {
     width: 80,
-    height: 40,
+    height: 80,
     color: "orange",
   },
   position: {
     x: 210,
-    y: 10,
+    y: 510,
   },
   collisionBox: {
     width: 80,
@@ -172,6 +156,8 @@ export const entities = [
 
   zombie1,
   zombie2,
+  zombie3,
+  zombie4,
 
   player,
 
@@ -181,6 +167,7 @@ export const entities = [
   wallRight,
   startWallTop,
   startWallBottom,
-  goalWall,
+  midWall2,
   midWall1,
+  midWall3,
 ];

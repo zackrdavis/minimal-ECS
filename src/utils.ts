@@ -19,7 +19,7 @@ export const makeSquare = (opts: {
         ? "mediumSeaGreen"
         : opts.role === "civilian"
         ? "pink"
-        : "tomato",
+        : "magenta",
   },
   position: {
     x: opts.x,

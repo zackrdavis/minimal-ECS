@@ -1,9 +1,9 @@
-import { Entity } from "./entities";
+import { Entity } from "../types";
 
 const maxSpeed = 7;
 const accel = 3;
 
-const pressedKeys = {
+const pressedKeys: Record<string, boolean> = {
   ArrowUp: false,
   ArrowDown: false,
   ArrowLeft: false,

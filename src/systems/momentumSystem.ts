@@ -1,4 +1,4 @@
-import { Entity } from "./entities";
+import { Entity } from "../types";
 
 // Adjust speed based on friction.
 const decelerate = (speed: number, friction: number) => {

@@ -1,4 +1,4 @@
-import { Entity } from "./entities";
+import { Entity } from "../types";
 
 let canvas: HTMLCanvasElement | null;
 let context: CanvasRenderingContext2D | null | undefined;

@@ -1,4 +1,4 @@
-import { Entity } from "./entities";
+import { Entity } from "../types";
 
 export const collisionSystem = (entities: Entity[]) => {
   // Get entities with collisionBox and position.

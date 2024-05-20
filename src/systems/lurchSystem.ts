@@ -1,4 +1,4 @@
-import { Entity } from "./entities";
+import { Entity } from "../types";
 
 export const lurchSystem = (entities: Entity[]) => {
   for (const entity of entities) {
