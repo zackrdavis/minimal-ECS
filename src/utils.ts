@@ -10,7 +10,7 @@ export const getEntsWithComps = <RC extends (keyof Entity)[]>(
   entities: Entity[]
 ) => {
   return entities.filter((ent) =>
-    components.every((comp) => Object.hasOwn(ent, comp))
+    components.every((comp) => ent[comp] !== undefined)
   ) as WithRequired<Entity, (typeof components)[number]>[];
 };
 
