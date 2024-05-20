@@ -17,6 +17,7 @@ export const reboundSystem = (allEntities: Entity[]) => {
     ["position", "rigidBody", "collisionBox", "velocity"],
     allEntities
   );
+
   // Loop through all entities with velocity and collisions.
   for (const entity of entities) {
     if (entity.collisionBox?.collisions?.length) {

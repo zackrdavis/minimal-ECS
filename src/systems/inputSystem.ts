@@ -1,4 +1,3 @@
-import { entities } from "../entities";
 import { Entity } from "../types";
 import { getEntsWithComps } from "../utils";
 
