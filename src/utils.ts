@@ -89,5 +89,9 @@ export const makeWall = (opts: {
     rigidBody: {
       stuck: true,
     },
+    velocity: {
+      x: 0,
+      y: 0,
+    },
   };
 };

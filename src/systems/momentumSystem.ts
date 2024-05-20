@@ -1,4 +1,5 @@
 import { Entity } from "../types";
+import { getEntsWithComps } from "../utils";
 
 // Adjust speed based on friction.
 const decelerate = (speed: number, friction: number) => {
@@ -9,16 +10,19 @@ const decelerate = (speed: number, friction: number) => {
   }
 };
 
-export const momentumSystem = (entities: Entity[]) => {
-  for (const entity of entities) {
-    if (entity.position && entity.velocity && entity.friction) {
-      // Apply the velocity to the position.
-      entity.position.x += entity.velocity.x;
-      entity.position.y += entity.velocity.y;
+export const momentumSystem = (allEntities: Entity[]) => {
+  const entities = getEntsWithComps(
+    ["velocity", "position", "friction"],
+    allEntities
+  );
 
-      // Apply friction to the velocity.
-      entity.velocity.x = decelerate(entity.velocity.x, entity.friction);
-      entity.velocity.y = decelerate(entity.velocity.y, entity.friction);
-    }
+  for (const entity of entities) {
+    // Apply the velocity to the position.
+    entity.position.x += entity.velocity.x;
+    entity.position.y += entity.velocity.y;
+
+    // Apply friction to the velocity.
+    entity.velocity.x = decelerate(entity.velocity.x, entity.friction);
+    entity.velocity.y = decelerate(entity.velocity.y, entity.friction);
   }
 };

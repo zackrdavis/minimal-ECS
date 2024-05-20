@@ -1,4 +1,5 @@
 import { Entity } from "../types";
+import { getEntsWithComps } from "../utils";
 
 type Update = {
   entity: Entity;
@@ -11,15 +12,14 @@ type Update = {
 // Store updates to apply after all entities have been checked.
 const updates: Update[] = [];
 
-export const reboundSystem = (entities: Entity[]) => {
+export const reboundSystem = (allEntities: Entity[]) => {
+  const entities = getEntsWithComps(
+    ["position", "rigidBody", "collisionBox", "velocity"],
+    allEntities
+  );
   // Loop through all entities with velocity and collisions.
   for (const entity of entities) {
-    if (
-      entity.velocity &&
-      entity.position &&
-      entity.rigidBody &&
-      entity.collisionBox?.collisions?.length
-    ) {
+    if (entity.collisionBox?.collisions?.length) {
       // Get current entity's velocity.
       let { x: vx1, y: vy1 } = entity.velocity;
       let { x: px1, y: py1 } = entity.position;
@@ -67,15 +67,17 @@ export const reboundSystem = (entities: Entity[]) => {
         }
 
         // Adjust position to cancel overlap
-        if (cornerCollision) {
-          px1 -= xOverlap;
-          py1 -= yOverlap;
-        } else if (xCollision) {
-          px1 -= xOverlap;
-          py1 = py1;
-        } else if (yCollision) {
-          px1 = px1;
-          py1 -= yOverlap;
+        if (!entity.rigidBody.stuck) {
+          if (cornerCollision) {
+            px1 -= xOverlap;
+            py1 -= yOverlap;
+          } else if (xCollision) {
+            px1 -= xOverlap;
+            py1 = py1;
+          } else if (yCollision) {
+            px1 = px1;
+            py1 -= yOverlap;
+          }
         }
       }
 
