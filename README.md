@@ -13,8 +13,11 @@ This implementation renders to `<canvas>` but otherwise avoids external APIs. Fo
 
 [Live Demo](https://zackrdavis.github.io/minimal-ecs/)
 
+[Some writing about it](https://zackrdavis.github.io/ecs)
+
 Inspired by blog posts:
 
+- [Starmancer Devblog](https://www.playstarmancer.com/devblog/2018/9/25/component-system-same-face-new-engine)
 - [Creating a Roguelike in Python + TDL, Part 1: Entity-Component System](https://nightblade9.github.io/python-zone/2018/creating-a-roguelike-in-python-tdl-part-1.html)
 - [A TypesScript ECS in 99 Lines of Code](https://maxwellforbes.com/posts/typescript-ecs-implementation/)
 
