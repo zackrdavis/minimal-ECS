@@ -11,7 +11,7 @@ Implementation of an [Entity-Component-System](https://en.wikipedia.org/wiki/Ent
 
 This implementation renders to `<canvas>` but otherwise avoids external APIs. For example, collision events propagate using transient components instead of DOM events.
 
-[Live Demo](https://zackrdavis.github.io/minimal-ecs/)
+[Live Demo](https://zackrdavis.github.io/ecs-demo/)
 
 [Some writing about it](https://zackrdavis.github.io/ecs)
 
