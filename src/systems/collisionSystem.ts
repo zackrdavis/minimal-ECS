@@ -1,8 +1,8 @@
 import { Entity } from "../types";
 import { getEntsWithComps } from "../utils";
 
-export const collisionSystem = (ents: Entity[]) => {
-  const entities = getEntsWithComps(["collisionBox", "position"], ents);
+export const collisionSystem = (allEntities: Entity[]) => {
+  const entities = getEntsWithComps(["collisionBox", "position"], allEntities);
 
   entities.forEach((entity1) => {
     // Get peers without the current entity.

@@ -1,4 +1,6 @@
+import { entities } from "../entities";
 import { Entity } from "../types";
+import { getEntsWithComps } from "../utils";
 
 const maxSpeed = 7;
 const accel = 3;
@@ -21,7 +23,7 @@ const clamp = (num: number, min: number, max: number) => {
   return Math.min(Math.max(num, min), max);
 };
 
-export const inputSystem = (entities: Entity[]) => {
+export const inputSystem = (allEntities: Entity[]) => {
   if (!listenerSet) {
     // Setup keyboard listeners.
     window.addEventListener("keydown", (e) => {
@@ -55,24 +57,22 @@ export const inputSystem = (entities: Entity[]) => {
     const changeVelX = bothX ? 0 : right ? accel : left ? -accel : 0;
     const changeVelY = bothY ? 0 : down ? accel : up ? -accel : 0;
 
+    const entities = getEntsWithComps(
+      ["velocity", "playerControl"],
+      allEntities
+    );
+
     for (const entity of entities) {
-      if (
-        entity.velocity &&
-        entity.playerControl
-        // // block controls on colliding entities
-        // entity.collisionBox?.collisions.length === 0
-      ) {
-        const { x, y } = entity.velocity;
+      const { x, y } = entity.velocity;
 
-        // Determine the change in velocity.
-        const newVelX = clamp(x + changeVelX, -maxSpeed, maxSpeed);
-        const newVelY = clamp(y + changeVelY, -maxSpeed, maxSpeed);
+      // Determine the change in velocity.
+      const newVelX = clamp(x + changeVelX, -maxSpeed, maxSpeed);
+      const newVelY = clamp(y + changeVelY, -maxSpeed, maxSpeed);
 
-        entity.velocity = {
-          x: newVelX,
-          y: newVelY,
-        };
-      }
+      entity.velocity = {
+        x: newVelX,
+        y: newVelY,
+      };
     }
   }
 };

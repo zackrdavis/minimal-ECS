@@ -53,10 +53,10 @@ export const makeSquare = (opts: {
   rigidBody: {
     stuck: false,
   },
-  playerControl: opts.role === "player",
+  playerControl: opts.role === "player" ? true : undefined,
   friction: opts.role === "player" ? 0.8 : 0.05,
-  infectable: opts.role === "civilian",
-  infectious: opts.role === "zombie",
+  infectable: opts.role === "civilian" ? true : undefined,
+  infectious: opts.role === "zombie" ? true : undefined,
 });
 
 export const makeWall = (opts: {
